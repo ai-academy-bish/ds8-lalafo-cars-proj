@@ -14,7 +14,15 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-DATA = Path(__file__).resolve().parent / "dataset" / "data"
+def _find_data() -> Path:
+    """dataset/data in this file's folder or the nearest parent (the file may be moved)."""
+    for d in Path(__file__).resolve().parents:
+        if (d / "dataset" / "data" / "listings.parquet").exists():
+            return d / "dataset" / "data"
+    raise FileNotFoundError("dataset/data/listings.parquet not found above " + __file__)
+
+
+DATA = _find_data()
 
 # Personal data - never shown in reports, dropped by load_listings(pii=False).
 PII_COLS = ["mobile", "email", "username", "device_id", "user_hash", "avatar"]

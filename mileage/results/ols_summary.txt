@@ -1,0 +1,176 @@
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.455
+Model:                            OLS   Adj. R-squared:                  0.448
+Method:                 Least Squares   F-statistic:                     58.43
+Date:                Fri, 20 Nov 2026   Prob (F-statistic):               0.00
+Time:                        14:50:34   Log-Likelihood:            -1.3364e+05
+No. Observations:               10773   AIC:                         2.676e+05
+Df Residuals:                   10620   BIC:                         2.687e+05
+Df Model:                         152                                         
+Covariance Type:            nonrobust                                         
+================================================================================================================
+                                                   coef    std err          t      P>|t|      [0.025      0.975]
+----------------------------------------------------------------------------------------------------------------
+const                                         1.434e+05   1.02e+04     14.046      0.000    1.23e+05    1.63e+05
+num__age                                      3.674e+04   1146.720     32.040      0.000    3.45e+04     3.9e+04
+num__engine_l                                 1922.6880   1027.290      1.872      0.061     -90.993    3936.369
+num__log_price                               -1.517e+04   1311.374    -11.571      0.000   -1.77e+04   -1.26e+04
+num__image_count                             -1550.9116    621.765     -2.494      0.013   -2769.687    -332.136
+num__age_c2                                  -1.031e+04    969.188    -10.641      0.000   -1.22e+04   -8412.988
+miss__missingindicator_engine_l              -5216.7323   2470.621     -2.112      0.035   -1.01e+04    -373.853
+miss__missingindicator_log_price             -3015.7095   4710.218     -0.640      0.522   -1.22e+04    6217.200
+cat__brand_BYD                               -8771.2569   8556.413     -1.025      0.305   -2.55e+04    8000.916
+cat__brand_Chevrolet                         -2.009e+04   7465.109     -2.691      0.007   -3.47e+04   -5452.507
+cat__brand_Daewoo                            -6.817e+04   1.99e+04     -3.425      0.001   -1.07e+05   -2.92e+04
+cat__brand_Dodge                              2.617e+04   1.24e+04      2.115      0.034    1919.180    5.04e+04
+cat__brand_Ford                               1.765e+04   9344.187      1.889      0.059    -669.846     3.6e+04
+cat__brand_GAC                               -1.372e+04    1.2e+04     -1.141      0.254   -3.73e+04    9859.512
+cat__brand_Geely                             -2.596e+04   1.21e+04     -2.145      0.032   -4.97e+04   -2234.664
+cat__brand_Honda                             -7607.8975   9898.173     -0.769      0.442    -2.7e+04    1.18e+04
+cat__brand_Hyundai                           -2766.4415   6996.494     -0.395      0.693   -1.65e+04    1.09e+04
+cat__brand_Jeep                              -1.025e+04   1.15e+04     -0.892      0.372   -3.28e+04    1.23e+04
+cat__brand_Kia                               -3003.4138   6435.890     -0.467      0.641   -1.56e+04    9612.138
+cat__brand_Land Rover                        -1819.5472   1.14e+04     -0.160      0.873   -2.42e+04    2.05e+04
+cat__brand_Lexus                             -1.952e+04   1.04e+04     -1.870      0.062      -4e+04     943.607
+cat__brand_Lixiang                           -1.202e+04   1.16e+04     -1.038      0.299   -3.47e+04    1.07e+04
+cat__brand_Mercedes-Benz                      2955.0269   6794.766      0.435      0.664   -1.04e+04    1.63e+04
+cat__brand_Nissan                             -2.19e+04   8640.504     -2.535      0.011   -3.88e+04   -4967.909
+cat__brand_Renault                           -1.992e+04   9255.007     -2.153      0.031   -3.81e+04   -1780.617
+cat__brand_Renault Samsung                   -4848.7677   1.15e+04     -0.423      0.672   -2.73e+04    1.76e+04
+cat__brand_Ssangyong                          6858.7391   1.11e+04      0.617      0.537   -1.49e+04    2.87e+04
+cat__brand_Subaru                            -2.956e+04   1.26e+04     -2.342      0.019   -5.43e+04   -4815.795
+cat__brand_Toyota                             1031.1797   6910.355      0.149      0.881   -1.25e+04    1.46e+04
+cat__brand_Volkswagen                        -2.162e+04   8964.628     -2.412      0.016   -3.92e+04   -4049.163
+cat__brand_Weltmeister                       -1.648e+04   1.84e+04     -0.895      0.371   -5.26e+04    1.96e+04
+cat__brand_ВАЗ (ЛАДА)                        -5.017e+04   1.05e+04     -4.782      0.000   -7.07e+04   -2.96e+04
+cat__brand_infrequent_sklearn                -1.055e+04   5737.434     -1.839      0.066   -2.18e+04     693.982
+cat__body_type_Бус                           -1.052e+04   1.13e+04     -0.927      0.354   -3.27e+04    1.17e+04
+cat__body_type_Внедорожник                    4033.6645   4359.031      0.925      0.355   -4510.853    1.26e+04
+cat__body_type_Кроссовер                     -2010.3674   3557.478     -0.565      0.572   -8983.691    4962.956
+cat__body_type_Купе                          -1.593e+04   1.02e+04     -1.569      0.117   -3.58e+04    3978.079
+cat__body_type_Лифтбек                        1238.3352   6626.939      0.187      0.852   -1.18e+04    1.42e+04
+cat__body_type_Минивэн                        1.093e+04   6237.114      1.752      0.080   -1300.811    2.32e+04
+cat__body_type_Пикап                         -5134.0537   6411.637     -0.801      0.423   -1.77e+04    7433.956
+cat__body_type_Седан                          5530.8817   3531.803      1.566      0.117   -1392.114    1.25e+04
+cat__body_type_Универсал                      8216.1768   5826.405      1.410      0.159   -3204.669    1.96e+04
+cat__body_type_Фургон                         1.303e+04   9594.125      1.358      0.174   -5775.471    3.18e+04
+cat__body_type_Хэтчбэк                       -3120.8440   4383.590     -0.712      0.477   -1.17e+04    5471.813
+cat__body_type_infrequent_sklearn             -204.6456   9691.335     -0.021      0.983   -1.92e+04    1.88e+04
+cat__transmission_Автомат                     1107.6574   2679.566      0.413      0.679   -4144.793    6360.108
+cat__transmission_Вариатор                     844.4440   3301.761      0.256      0.798   -5627.626    7316.514
+cat__transmission_Механика                    1.067e+04   4664.518      2.287      0.022    1523.420    1.98e+04
+cat__transmission_Робот                        703.0049   4893.047      0.144      0.886   -8888.285    1.03e+04
+cat__transmission_Типтроник                   9567.0490   5818.621      1.644      0.100   -1838.539     2.1e+04
+cat__transmission_infrequent_sklearn          -2.64e+04   2.13e+04     -1.237      0.216   -6.82e+04    1.54e+04
+cat__drive_AWD, полный                        3821.1235   2591.536      1.474      0.140   -1258.773    8901.020
+cat__drive_unknown                           -3339.6745   3047.283     -1.096      0.273   -9312.920    2633.571
+cat__drive_Задний                             -116.6936   3621.879     -0.032      0.974   -7216.254    6982.867
+cat__drive_Передний                           -602.4006   2524.647     -0.239      0.811   -5551.182    4346.381
+cat__steering_wheel_Слева                     -346.3644   2338.136     -0.148      0.882   -4929.549    4236.820
+cat__steering_wheel_Справа                   -2.516e+04   8468.432     -2.971      0.003   -4.18e+04   -8557.804
+cat__condition_Б/у                            3132.8092   1600.802      1.957      0.050      -5.062    6270.680
+cat__condition_Новый                         -4707.9912   2111.085     -2.230      0.026   -8846.113    -569.869
+cat__tech_condition_Идеальное                -6468.5810   2054.420     -3.149      0.002   -1.05e+04   -2441.532
+cat__tech_condition_Хорошее                   5984.7552   2225.023      2.690      0.007    1623.294    1.03e+04
+cat__tech_condition_infrequent_sklearn       -4.434e+04   1.69e+04     -2.623      0.009   -7.75e+04   -1.12e+04
+cat__customs_cleared_Не растаможен           -3700.4183   5200.342     -0.712      0.477   -1.39e+04    6493.227
+cat__customs_cleared_Растаможен              -1936.7631   1626.390     -1.191      0.234   -5124.793    1251.267
+cat__registration_country_Грузия              1748.9061   7898.302      0.221      0.825   -1.37e+04    1.72e+04
+cat__registration_country_Кыргызстан          6349.4775   2011.706      3.156      0.002    2406.157    1.03e+04
+cat__registration_country_США                 1.682e+04   1.07e+04      1.575      0.115   -4109.530    3.77e+04
+cat__registration_country_Южная Корея         1.036e+04   4200.876      2.466      0.014    2125.882    1.86e+04
+cat__registration_country_infrequent_sklearn -4453.7844   7046.414     -0.632      0.527   -1.83e+04    9358.508
+cat__region_chui                             -1730.3926   6459.288     -0.268      0.789   -1.44e+04    1.09e+04
+cat__region_issyk_kul                         -867.2780   7434.908     -0.117      0.907   -1.54e+04    1.37e+04
+cat__region_jalal_abad                        8026.5917   7651.487      1.049      0.294   -6971.756     2.3e+04
+cat__region_naryn                             6082.4787   1.14e+04      0.532      0.595   -1.63e+04    2.85e+04
+cat__region_osh                               3245.0820   6801.157      0.477      0.633   -1.01e+04    1.66e+04
+cat__region_talas                             2262.3644   1.09e+04      0.208      0.836   -1.91e+04    2.36e+04
+cat__seller_private                           4595.8371   1740.756      2.640      0.008    1183.629    8008.045
+cat__currency_USD                             -1.04e+04   1819.246     -5.715      0.000    -1.4e+04   -6830.086
+cat__currency_unknown                        -1.049e+04   7118.419     -1.473      0.141   -2.44e+04    3466.140
+cat__is_vip_yes                                513.3391   2088.508      0.246      0.806   -3580.528    4607.206
+cat__brand_model_BMW | X5                     2.799e+04   7938.945      3.525      0.000    1.24e+04    4.35e+04
+cat__brand_model_BMW | X7                     2.849e+04   7997.263      3.563      0.000    1.28e+04    4.42e+04
+cat__brand_model_BYD | Song Plus             -4298.1062    1.2e+04     -0.358      0.720   -2.78e+04    1.92e+04
+cat__brand_model_Chevrolet | Cruze            3.196e+04   1.36e+04      2.343      0.019    5220.464    5.87e+04
+cat__brand_model_Chevrolet | Malibu           3.329e+04   1.13e+04      2.951      0.003    1.12e+04    5.54e+04
+cat__brand_model_Chevrolet | Spark             -2.3e+04   9534.556     -2.412      0.016   -4.17e+04   -4312.572
+cat__brand_model_Chevrolet | Trax             -914.5990    1.3e+04     -0.071      0.944   -2.63e+04    2.45e+04
+cat__brand_model_Daewoo | Matiz              -9770.7512   2.24e+04     -0.437      0.662   -5.36e+04    3.41e+04
+cat__brand_model_Daewoo | Nexia               1.371e+04   2.14e+04      0.641      0.521   -2.82e+04    5.56e+04
+cat__brand_model_Honda | Accord              -7228.3358   1.33e+04     -0.543      0.587   -3.33e+04    1.89e+04
+cat__brand_model_Honda | CR-V                -3356.2271   1.34e+04     -0.250      0.802   -2.96e+04    2.29e+04
+cat__brand_model_Honda | Fit                 -2.226e+04   1.54e+04     -1.445      0.148   -5.25e+04    7937.152
+cat__brand_model_Hyundai | Avante             5392.1226   9206.527      0.586      0.558   -1.27e+04    2.34e+04
+cat__brand_model_Hyundai | Elantra           -2.711e+04   1.09e+04     -2.491      0.013   -4.84e+04   -5772.911
+cat__brand_model_Hyundai | Grandeur           3.432e+04   9239.307      3.715      0.000    1.62e+04    5.24e+04
+cat__brand_model_Hyundai | Kona               9326.4550   1.25e+04      0.745      0.456   -1.52e+04    3.39e+04
+cat__brand_model_Hyundai | Palisade           1.614e+04   9891.094      1.632      0.103   -3243.714    3.55e+04
+cat__brand_model_Hyundai | Porter              1.86e+04   1.15e+04      1.617      0.106   -3952.301    4.11e+04
+cat__brand_model_Hyundai | Santa Fe           1.836e+04   9653.205      1.901      0.057    -566.599    3.73e+04
+cat__brand_model_Hyundai | Solaris            1.001e+05   1.13e+04      8.864      0.000     7.8e+04    1.22e+05
+cat__brand_model_Hyundai | Sonata             4.172e+04   8744.267      4.771      0.000    2.46e+04    5.89e+04
+cat__brand_model_Hyundai | Tucson             1.112e+04   1.05e+04      1.064      0.288   -9372.161    3.16e+04
+cat__brand_model_Kia | Carnival               1.761e+04   1.02e+04      1.724      0.085   -2414.752    3.76e+04
+cat__brand_model_Kia | K3                     3820.4403   9087.600      0.420      0.674    -1.4e+04    2.16e+04
+cat__brand_model_Kia | K5                     1.465e+04   8227.971      1.780      0.075   -1478.713    3.08e+04
+cat__brand_model_Kia | K7                     2.032e+04   8899.055      2.284      0.022    2879.141    3.78e+04
+cat__brand_model_Kia | K8                     2.458e+04   1.33e+04      1.849      0.065   -1483.091    5.06e+04
+cat__brand_model_Kia | Morning               -3.493e+04   8892.489     -3.928      0.000   -5.24e+04   -1.75e+04
+cat__brand_model_Kia | Optima                 -1.71e+04   9623.862     -1.777      0.076    -3.6e+04    1766.074
+cat__brand_model_Kia | Ray                    1.969e+04   1.22e+04      1.620      0.105   -4138.190    4.35e+04
+cat__brand_model_Kia | Rio                    1.113e+05   1.19e+04      9.329      0.000    8.79e+04    1.35e+05
+cat__brand_model_Kia | Seltos                 2.807e+04   1.12e+04      2.515      0.012    6190.400       5e+04
+cat__brand_model_Kia | Sorento                1.579e+04   8826.673      1.789      0.074   -1509.126    3.31e+04
+cat__brand_model_Kia | Sportage               3579.6224   9022.149      0.397      0.692   -1.41e+04    2.13e+04
+cat__brand_model_Kia | Stonic                -4179.6872   1.31e+04     -0.319      0.750   -2.99e+04    2.15e+04
+cat__brand_model_Land Rover | Range Rover     1.249e+04   1.55e+04      0.806      0.420   -1.79e+04    4.29e+04
+cat__brand_model_Lexus | ES                   1.903e+04   1.27e+04      1.499      0.134   -5855.971    4.39e+04
+cat__brand_model_Lexus | GX                   1.034e+04    1.4e+04      0.741      0.458    -1.7e+04    3.77e+04
+cat__brand_model_Lexus | LX                   3.241e+04    1.4e+04      2.320      0.020    5022.068    5.98e+04
+cat__brand_model_Lexus | NX                   1.301e+04   1.43e+04      0.910      0.363    -1.5e+04    4.11e+04
+cat__brand_model_Lexus | RX                   1.077e+04   1.29e+04      0.834      0.404   -1.45e+04    3.61e+04
+cat__brand_model_Lixiang | L7                -2966.1671    1.6e+04     -0.185      0.853   -3.44e+04    2.84e+04
+cat__brand_model_Mercedes-Benz | E-Class      3248.5090   1.15e+04      0.284      0.777   -1.92e+04    2.57e+04
+cat__brand_model_Mercedes-Benz | Спринтер     9.516e+04   1.26e+04      7.539      0.000    7.04e+04     1.2e+05
+cat__brand_model_Renault | QM6                1.164e+04    1.4e+04      0.831      0.406   -1.58e+04    3.91e+04
+cat__brand_model_Ssangyong | Korando         -5329.3491   1.56e+04     -0.342      0.733   -3.59e+04    2.53e+04
+cat__brand_model_Ssangyong | Rexton          -1.678e+04   1.32e+04     -1.270      0.204   -4.27e+04    9121.469
+cat__brand_model_Ssangyong | Rexton Khan      8590.5211   1.42e+04      0.606      0.545   -1.92e+04    3.64e+04
+cat__brand_model_Ssangyong | Rexton Sports    -913.2063   1.43e+04     -0.064      0.949   -2.89e+04     2.7e+04
+cat__brand_model_Ssangyong | Tivoli           -2.09e+04   1.44e+04     -1.452      0.147   -4.91e+04    7314.181
+cat__brand_model_Subaru | Ascent              3.165e+04   1.47e+04      2.158      0.031    2901.279    6.04e+04
+cat__brand_model_Subaru | Crosstrek           1.966e+04   1.71e+04      1.148      0.251   -1.39e+04    5.32e+04
+cat__brand_model_Subaru | Forester            1.363e+04   1.42e+04      0.961      0.337   -1.42e+04    4.14e+04
+cat__brand_model_Subaru | Legacy               3.43e+04   1.54e+04      2.222      0.026    4039.459    6.46e+04
+cat__brand_model_Subaru | Outback             1.932e+04   1.41e+04      1.369      0.171   -8349.769     4.7e+04
+cat__brand_model_Toyota | 4Runner            -1985.7061   1.18e+04     -0.169      0.866   -2.51e+04    2.11e+04
+cat__brand_model_Toyota | Avalon             -1849.4886   1.15e+04     -0.161      0.872   -2.44e+04    2.07e+04
+cat__brand_model_Toyota | Camry               4372.3216   8518.827      0.513      0.608   -1.23e+04    2.11e+04
+cat__brand_model_Toyota | Corolla            -4.076e+04   9612.756     -4.240      0.000   -5.96e+04   -2.19e+04
+cat__brand_model_Toyota | Highlander          1.148e+04   9358.638      1.227      0.220   -6860.123    2.98e+04
+cat__brand_model_Toyota | Land Cruiser        2.028e+04   1.22e+04      1.662      0.096   -3634.816    4.42e+04
+cat__brand_model_Toyota | Levin              -4.349e+04   1.34e+04     -3.236      0.001   -6.98e+04   -1.71e+04
+cat__brand_model_Toyota | Prius               1224.4167   9887.971      0.124      0.901   -1.82e+04    2.06e+04
+cat__brand_model_Toyota | RAV4               -7180.8056   9304.545     -0.772      0.440   -2.54e+04    1.11e+04
+cat__brand_model_Volkswagen | Polo            1.401e+05   1.43e+04      9.819      0.000    1.12e+05    1.68e+05
+cat__brand_model_Weltmeister | EX5           -1.965e+04   2.12e+04     -0.928      0.353   -6.11e+04    2.18e+04
+cat__brand_model_ВАЗ (ЛАДА) | 2107           -1.067e+05   1.43e+04     -7.478      0.000   -1.35e+05   -7.88e+04
+cat__brand_model_infrequent_sklearn            418.8523   6408.036      0.065      0.948   -1.21e+04     1.3e+04
+bin__fuel_petrol                             -8605.0926   3377.012     -2.548      0.011   -1.52e+04   -1985.516
+bin__fuel_diesel                              1.896e+04   4180.341      4.535      0.000    1.08e+04    2.72e+04
+bin__fuel_lpg                                 3.654e+04   3724.796      9.809      0.000    2.92e+04    4.38e+04
+bin__fuel_hybrid                              8971.1322   3558.495      2.521      0.012    1995.815    1.59e+04
+bin__fuel_ev                                 -1616.1282   4978.638     -0.325      0.745   -1.14e+04    8142.934
+bin__fuel_isna                                3474.5282   5154.050      0.674      0.500   -6628.376    1.36e+04
+==============================================================================
+Omnibus:                     2016.269   Durbin-Watson:                   1.995
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):            12263.075
+Skew:                           0.760   Prob(JB):                         0.00
+Kurtosis:                       8.001   Cond. No.                         286.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
