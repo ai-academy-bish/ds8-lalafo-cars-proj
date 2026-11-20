@@ -1,0 +1,5 @@
+- [User profile](user-profile.md) — DS student, team academy project on lalafo.kg cars, works in Russian
+- [Reports, not notebooks](feedback-reports-md-not-notebooks.md) — markdown report + ./fig from a script
+- [Linear models per checklist](feedback-linear-models-checklist.md) — follow linear_regression_checklist.md, LR/Ridge only
+- [Mileage task](project-mileage-task.md) — predict mileage 2010–2024; pilot done, same test split for all iterations
+- [GitHub repo](reference-github-repo.md) — ai-academy-bish/ds8-lalafo-cars-proj, user commits to main; data/ gitignored
