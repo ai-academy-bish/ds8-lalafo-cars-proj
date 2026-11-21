@@ -1,8 +1,10 @@
 """Modelling table for the mileage pilot: unique used cars of model years 2010-2024.
 
-Run:  venv/bin/python mileage/build_dataset.py
+Run:  venv/bin/python mileage/build_dataset.py [--listings-only]
 Writes mileage/data/mileage_2010_2024.parquet (features, target, fixed train/test split)
 and mileage/data/build_summary.json (row funnel, unlabelled population).
+With --listings-only (only dataset/data/listings.parquet present) it writes
+mileage_2010_2024_listings.parquet / build_summary_listings.json instead - see build().
 
 The split is stored with the data on purpose: every later experiment must be
 measured on the same held-out test set, or the numbers stop being comparable.
@@ -49,9 +51,21 @@ def as_category(s: pd.Series) -> pd.Series:
     return s.astype(object).where(s.notna(), np.nan)
 
 
-def build() -> tuple[pd.DataFrame, dict]:
+def out_paths(listings_only: bool) -> tuple[Path, Path]:
+    """Separate files per mode, so a listings-only build never overwrites the pilot table."""
+    sfx = "_listings" if listings_only else ""
+    return OUT / f"mileage_2010_2024{sfx}.parquet", OUT / f"build_summary{sfx}.json"
+
+
+def build(listings_only: bool = False) -> tuple[pd.DataFrame, dict]:
+    """listings_only=True needs only dataset/data/listings.parquet:
+    cities come from the ads themselves, duplicates are found by rule C only (no photo hashes),
+    and 'dealer' means >= 3 ads in listings (no `pro` flag). Rows and split differ from the pilot."""
     raw = prep.load_listings()
-    cities, users, im = prep.load_cities(), prep.load_users(), prep.load_image_meta()
+    if listings_only:
+        cities, users, im = prep.cities_from_listings(raw), None, None
+    else:
+        cities, users, im = prep.load_cities(), prep.load_users(), prep.load_image_meta()
     df = prep.clean(raw, cities)
     df = prep.mark_duplicates(df, prep.duplicate_pairs(df, im))
     df["seller"] = prep.seller_type(df, users)
@@ -124,6 +138,7 @@ def build() -> tuple[pd.DataFrame, dict]:
     out = out.reset_index(drop=True)
 
     summary = {
+        "listings_only": listings_only,
         "snapshot_year": SNAPSHOT_YEAR, "years": [YEAR_MIN, YEAR_MAX], "km_min": KM_MIN,
         "km_per_year": list(KM_PER_YEAR), "test_size": TEST_SIZE, "random_state": RANDOM_STATE,
         "funnel": funnel, "split_counts": out.split.value_counts().to_dict(),
@@ -134,9 +149,11 @@ def build() -> tuple[pd.DataFrame, dict]:
 
 
 if __name__ == "__main__":
+    listings_only = "--listings-only" in sys.argv[1:]
     OUT.mkdir(exist_ok=True)
-    data, summary = build()
-    data.to_parquet(OUT / "mileage_2010_2024.parquet", index=False)
-    (OUT / "build_summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2))
+    data, summary = build(listings_only)
+    data_path, summary_path = out_paths(listings_only)
+    data.to_parquet(data_path, index=False)
+    summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2))
     print(json.dumps(summary, ensure_ascii=False, indent=2))
     print(data.drop(columns=["ad_id", "user_id"]).describe(include="all").T.to_string())
