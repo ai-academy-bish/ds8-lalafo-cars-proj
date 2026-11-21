@@ -74,6 +74,14 @@ def load_cities() -> pd.DataFrame:
     return pd.read_parquet(DATA / "cities.parquet")
 
 
+def cities_from_listings(df: pd.DataFrame) -> pd.DataFrame:
+    """Stand-in for cities.parquet when only listings.parquet is available: the same columns,
+    built from the ads (each city_id carries one region value in listings, or none)."""
+    return (df.groupby("city_id")
+            .agg(name=("city", "first"), region=("region", "first"), listing_count=("ad_id", "size"))
+            .reset_index())
+
+
 def load_image_meta() -> pd.DataFrame:
     """Image rows without the image bytes (column projection: ~1 s for 73 GB)."""
     import pyarrow.dataset as ds
@@ -238,13 +246,17 @@ class _DSU:
         self.p[self.find(a)] = self.find(b)
 
 
-def duplicate_pairs(df: pd.DataFrame, im: pd.DataFrame) -> pd.DataFrame:
+def duplicate_pairs(df: pd.DataFrame, im: pd.DataFrame | None = None) -> pd.DataFrame:
     """Candidate duplicate ad pairs, one row per (pair, rule).
 
     A - share >= 3 identical photos (p_hash), ignoring hashes seen in >= 20 ads (stock art)
     B - cover photos within Hamming distance 3 and same brand/model/year
     C - same brand, model, year, price, currency and seller
+
+    Without photo metadata (``im=None``, listings-only mode) only rule C is applied.
     """
+    if im is None:
+        return _same_key_pairs(df)
     out = []
     ph = im.dropna(subset=["p_hash"])[["ad_id", "p_hash"]].drop_duplicates()
     n_ads = ph.groupby("p_hash").ad_id.nunique()
@@ -268,12 +280,16 @@ def duplicate_pairs(df: pd.DataFrame, im: pd.DataFrame) -> pd.DataFrame:
     b = [(x, y) for x, y in cand
          if bin(int(h[x]) ^ int(h[y])).count("1") <= 3 and key.get(x) == key.get(y)]
     out.append(pd.DataFrame(b, columns=["ad_id_x", "ad_id_y"]).assign(rule="B_cover_photo"))
+    out.append(_same_key_pairs(df))
+    return pd.concat(out, ignore_index=True)
 
+
+def _same_key_pairs(df: pd.DataFrame) -> pd.DataFrame:
+    """Rule C: same brand, model, year, price, currency and seller."""
     k = ["brand", "model", "year", "price", "currency", "user_id"]
     g = df.dropna(subset=["price"]).groupby(k).ad_id.agg(list)
     c = [(min(v[0], x), max(v[0], x)) for v in g if len(v) > 1 for x in v[1:]]
-    out.append(pd.DataFrame(c, columns=["ad_id_x", "ad_id_y"]).assign(rule="C_same_key"))
-    return pd.concat(out, ignore_index=True)
+    return pd.DataFrame(c, columns=["ad_id_x", "ad_id_y"]).assign(rule="C_same_key")
 
 
 def mark_duplicates(df: pd.DataFrame, pairs: pd.DataFrame) -> pd.DataFrame:
@@ -291,11 +307,18 @@ def mark_duplicates(df: pd.DataFrame, pairs: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def seller_type(df: pd.DataFrame, users: pd.DataFrame) -> pd.Series:
-    """'dealer' = pro account or >= 3 ads in the dataset, else 'private'."""
-    u = users.set_index("user_id")
-    pro = df.user_id.map(u.pro).fillna(False).astype(bool)
-    n = df.user_id.map(u.ads_count).fillna(1)
+def seller_type(df: pd.DataFrame, users: pd.DataFrame | None = None) -> pd.Series:
+    """'dealer' = pro account or >= 3 ads in the dataset, else 'private'.
+
+    Without users.parquet (listings-only mode) there is no `pro` flag, and the ad count is
+    counted over the rows of `df` itself, so fewer sellers come out as dealers."""
+    if users is None:
+        pro = pd.Series(False, index=df.index)
+        n = df.user_id.map(df.user_id.value_counts()).fillna(1)
+    else:
+        u = users.set_index("user_id")
+        pro = df.user_id.map(u.pro).fillna(False).astype(bool)
+        n = df.user_id.map(u.ads_count).fillna(1)
     return pd.Series(np.where(pro | (n >= 3), "dealer", "private"), index=df.index)
 
 
